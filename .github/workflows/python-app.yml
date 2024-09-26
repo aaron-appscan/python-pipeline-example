@@ -29,3 +29,15 @@ jobs:
       - name: Run tests
         run: |
           python -m unittest discover
+
+      - name: AppScan Static Analyzer
+        uses: HCL-TECH-SOFTWARE/appscan-static-analyzer-action@v1.0.5
+        with:
+          key: ${{ secrets.APPSCAN_KEY_ID }}        # ID de la API Key
+          secret: ${{ secrets.APPSCAN_KEY_SECRET }}  # Secreto de la API Key
+          group: 'your-group-id'                    # ID del grupo en AppScan donde quieres subir los resultados
+          file: './'                                # Directorio a escanear (puedes especificar archivos individuales o carpetas)
+          scanType: 'full'                          # Tipo de escaneo (puede ser 'full' o 'incremental')
+        env:
+          APPSCAN_KEY_ID: ${{ secrets.APPSCAN_KEY_ID }}         # Variables de entorno
+          APPSCAN_KEY_SECRET: ${{ secrets.APPSCAN_KEY_SECRET }}
